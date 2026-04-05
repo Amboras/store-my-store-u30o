@@ -8,6 +8,7 @@ import AnnouncementBar from '@/components/layout/announcement-bar'
 import { AnalyticsProvider } from '@/components/analytics-provider'
 import CookieConsent from '@/components/cookie-consent'
 import { Toaster } from 'sonner'
+import { ElementPickerListener } from '@/components/element-picker-listener'
 
 const heading = Cormorant_Garamond({
   subsets: ['latin'],
@@ -40,6 +41,7 @@ export default function RootLayout({
     <html lang="en" className={`${heading.variable} ${body.variable}`} suppressHydrationWarning>
       <body>
         <Providers>
+          <ElementPickerListener />
           <AnnouncementBar />
           <Header />
           <main className="min-h-screen">
