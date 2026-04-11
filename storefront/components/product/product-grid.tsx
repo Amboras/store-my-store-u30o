@@ -10,6 +10,7 @@ interface ProductGridProps {
   collectionId?: string
   categoryId?: string
   sortBy?: string
+  query?: string
 }
 
 function ProductSkeleton() {
@@ -29,11 +30,13 @@ export default function ProductGrid({
   collectionId,
   categoryId,
   sortBy = 'newest',
+  query,
 }: ProductGridProps) {
   const { data: rawProducts, isLoading, error } = useProducts({
     limit,
     collection_id: collectionId,
     category_id: categoryId,
+    q: query,
   })
 
   const productIds = rawProducts?.map((p: any) => p.id) || []
