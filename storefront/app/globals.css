@@ -4,35 +4,37 @@
 
 @layer base {
   :root {
-    --background: 40 20% 98%;
-    --foreground: 0 0% 10%;
-    --muted: 40 10% 94%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 35 40% 50%;
+    /* Velour brand — deep plum, soft rose, warm ivory */
+    --background: 340 20% 98%;
+    --foreground: 330 15% 10%;
+    --muted: 330 12% 93%;
+    --muted-foreground: 330 8% 48%;
+    --accent: 330 35% 55%;
     --accent-foreground: 0 0% 100%;
-    --border: 40 10% 88%;
-    --ring: 35 40% 50%;
-    --primary: 0 0% 10%;
+    --border: 330 12% 86%;
+    --ring: 330 35% 55%;
+    --primary: 330 20% 15%;
     --primary-foreground: 0 0% 98%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    /* Brand colors (dynamically injected from Store.metadata.brand) */
-    /* Access in CSS: var(--brand-primary), var(--brand-secondary) */
-    /* Managed by BrandStyleInjector component */
+    --brand-primary: #2d1a2e;
+    --brand-secondary: #c97fa5;
+    --brand-blush: #f5e6ef;
+    --brand-gold: #c9a97f;
   }
 
   .dark {
-    --background: 0 0% 6%;
-    --foreground: 40 20% 94%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 55%;
-    --accent: 35 45% 55%;
+    --background: 330 12% 6%;
+    --foreground: 330 15% 94%;
+    --muted: 330 8% 12%;
+    --muted-foreground: 330 8% 55%;
+    --accent: 330 35% 60%;
     --accent-foreground: 0 0% 100%;
-    --border: 0 0% 16%;
-    --ring: 35 45% 55%;
-    --primary: 40 20% 94%;
-    --primary-foreground: 0 0% 6%;
+    --border: 330 8% 18%;
+    --ring: 330 35% 55%;
+    --primary: 330 15% 90%;
+    --primary-foreground: 330 15% 8%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
   }
@@ -72,13 +74,13 @@
     @apply w-full;
   }
 
-  /* Brand color utilities - uses colors from Store.metadata.brand */
+  /* Brand color utilities */
   .btn-brand-primary {
     background-color: var(--brand-primary, hsl(var(--primary)));
     color: white;
   }
   .btn-brand-primary:hover {
-    opacity: 0.9;
+    opacity: 0.88;
   }
 
   .text-brand-primary {
@@ -100,6 +102,18 @@
   .bg-brand-secondary {
     background-color: var(--brand-secondary, hsl(var(--accent)));
   }
+
+  .bg-brand-blush {
+    background-color: var(--brand-blush);
+  }
+
+  .velour-gradient {
+    background: linear-gradient(135deg, #2d1a2e 0%, #5a2d5c 50%, #8b4a6e 100%);
+  }
+
+  .velour-soft-gradient {
+    background: linear-gradient(160deg, #f9f0f5 0%, #f5e6ef 50%, #ecdaf0 100%);
+  }
 }
 
 /* Smooth scrolling */
@@ -109,7 +123,8 @@ html {
 
 /* Selection color */
 ::selection {
-  @apply bg-accent/20 text-foreground;
+  background-color: #f5e6ef;
+  color: #2d1a2e;
 }
 
 /* Focus styles */
@@ -131,4 +146,25 @@ html {
 
 .animate-fade-in {
   animation: fade-in 0.3s ease-out;
+}
+
+/* Velour shimmer effect */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(201,169,127,0.4) 50%, transparent 100%);
+  background-size: 200% auto;
+  animation: shimmer 2.5s linear infinite;
+}
+
+/* Badge pulse */
+@keyframes gentle-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.animate-gentle-pulse {
+  animation: gentle-pulse 2s ease-in-out infinite;
 }

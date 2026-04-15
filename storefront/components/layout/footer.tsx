@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { Heart, Lock, Package } from 'lucide-react'
 import { clearConsent } from '@/lib/cookie-consent'
 import { usePolicies } from '@/hooks/use-policies'
 
@@ -20,12 +21,10 @@ const footerLinks = {
 export default function Footer() {
   const { policies } = usePolicies()
 
-  // Build company links dynamically based on available policies
   const companyLinks = [
     { label: 'About', href: '/about' },
   ]
 
-  // Add policy links only if they're set in the admin
   if (policies?.privacy_policy) {
     companyLinks.push({ label: 'Privacy Policy', href: '/privacy' })
   }
@@ -40,19 +39,39 @@ export default function Footer() {
   }
 
   return (
-    <footer className="border-t bg-muted/30">
-      <div className="container-custom py-section-sm">
+    <footer className="border-t" style={{ borderColor: 'hsl(var(--border))' }}>
+      {/* Discreet Shipping Banner */}
+      <div className="py-4 border-b" style={{ background: 'var(--brand-blush)' }}>
+        <div className="container-custom">
+          <div className="flex flex-wrap items-center justify-center gap-8 text-xs">
+            <div className="flex items-center gap-2">
+              <Package className="h-4 w-4" style={{ color: 'var(--brand-secondary)' }} strokeWidth={1.5} />
+              <span className="text-foreground/70">Discreet Packaging — No labels, no hints</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Lock className="h-4 w-4" style={{ color: 'var(--brand-secondary)' }} strokeWidth={1.5} />
+              <span className="text-foreground/70">Private Billing — &quot;Velour Wellness&quot; on statements</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Heart className="h-4 w-4" style={{ color: 'var(--brand-secondary)' }} strokeWidth={1.5} />
+              <span className="text-foreground/70">Body-Safe Materials — Only the best for you</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container-custom py-section-sm" style={{ background: 'hsl(var(--background))' }}>
         {/* Main Footer */}
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block">
-              <span className="font-heading text-2xl font-semibold">
-                Store
+              <span className="font-heading text-2xl font-semibold" style={{ color: 'var(--brand-primary)' }}>
+                Velour
               </span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Curated products crafted with care. Quality you can feel, design you can see.
+              Premium intimacy wellness, crafted for pleasure and self-confidence. Delivered with complete discretion.
             </p>
           </div>
 
@@ -102,7 +121,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} Store. All rights reserved.
+            &copy; {new Date().getFullYear()} Velour. All rights reserved. For adults 18+.
           </p>
           <div className="flex items-center gap-6">
             <button
